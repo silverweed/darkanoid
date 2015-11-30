@@ -1,0 +1,6 @@
+name "darkanoid"
+description "A minimal D application."
+copyright "Copyright © 2015, G. Parolini"
+authors "G. Parolini"
+dependency "dsfml:graphics" version="~>2.1.0"
+license "GPL-2.0"
