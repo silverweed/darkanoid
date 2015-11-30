@@ -1,9 +1,10 @@
 module darkanoid.level;
 
+debug import std.stdio;
 import dsfml.graphics;
 import darkanoid.resources, darkanoid.constants : resources;
 
-class Level {
+class Level : Drawable {
 	
 	static immutable Color[] BrickColors = [
 		Color(204, 204, 204), // gray
@@ -16,7 +17,7 @@ class Level {
 
 	enum Width = 15, Height = 25;
 
-	private Sprite[Height][Width] grid;
+	private Sprite[Width][Height] grid;
 	private int rowCursor, colCursor;
 
 	/// Adds a whole row of bricks of color `col`
@@ -28,12 +29,14 @@ class Level {
 
 		++rowCursor;
 
-		for (colCursor = 0; colCursor < Height; ++colCursor) {
+		for (colCursor = 0; colCursor < Width; ++colCursor) {
 
 			assert(0 <= rowCursor && rowCursor < Height);
 			assert(0 <= colCursor && colCursor < Width);
 
-			grid[rowCursor][colCursor] = resources.newBrick(col);
+			auto brick = resources.newBrick(col);
+			brick.position = Vector2f(colCursor * 100, rowCursor * 21);
+			grid[rowCursor][colCursor] = brick;
 		}
 	}
 
@@ -45,5 +48,16 @@ class Level {
 		}
 
 		return lv;
+	}
+
+	void draw(RenderTarget target, RenderStates states) {
+		for (int row = 0; row < Height; ++row) {
+			for (int col = 0; col < Width; ++col) {
+				auto sprite = grid[row][col];
+				if (sprite !is null) {
+					target.draw(sprite, states);
+				}
+			}
+		}
 	}
 }

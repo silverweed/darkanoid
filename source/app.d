@@ -1,15 +1,17 @@
-import std.stdio;
+import std.stdio, std.path : dirName;
 import dsfml.graphics;
 import darkanoid;
 
 void main(string[] args) {
-	appBasePath = args[0];
+	appBasePath = args[0].dirName;
 
 	auto window = new RenderWindow(VideoMode(800, 600), "Hello");
 
 	auto circle = new CircleShape(5);
 	circle.position = Vector2f(100, 100);
 	circle.fillColor = Color.Green;
+
+	auto lv = Level.simple();
 
 	while (window.isOpen) {
 		Event event;
@@ -24,7 +26,7 @@ void main(string[] args) {
 		}
 
 		window.clear();
-		window.draw(circle);
+		window.draw(lv);
 		window.display();
 	}
 }

@@ -20,7 +20,8 @@ package class Resources {
 		}
 		auto sprite = new Sprite();
 		sprite.setTexture(texture);
-		//sprite.setColor(col);
+		sprite.textureRect = IntRect(0, 0, 100, 21);
+		sprite.color = col;
 		return sprite;
 	}
 }
