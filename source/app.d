@@ -12,6 +12,7 @@ void main(string[] args) {
 	circle.fillColor = Color.Green;
 
 	auto lv = Level.simple();
+	auto player = new Player(window);
 
 	while (window.isOpen) {
 		Event event;
@@ -20,13 +21,24 @@ void main(string[] args) {
 			case Event.EventType.Closed:
 				window.close();
 				break;
+			case Event.EventType.KeyPressed:
+				if (event.key.code == Keyboard.Key.Q)
+					window.close();
+				break;
 			default: 
 				break;
 			}
 		}
 
+		if (Keyboard.isKeyPressed(Keyboard.Key.Left)) {
+			player.move(-5);
+		} else if (Keyboard.isKeyPressed(Keyboard.Key.Right)) {
+			player.move(5);
+		}
+
 		window.clear();
 		window.draw(lv);
+		window.draw(player);
 		window.display();
 	}
 }
