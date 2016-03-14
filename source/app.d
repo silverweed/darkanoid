@@ -3,7 +3,9 @@ import dsfml.graphics;
 import darkanoid;
 
 void main(string[] args) {
-	appBasePath = args[0].dirName;
+	appBasePath = dirName(args[0]);
+
+	debug stderr.writeln("base path: " ~ appBasePath);
 
 	auto window = new RenderWindow(VideoMode(800, 600), "Hello");
 
@@ -13,6 +15,7 @@ void main(string[] args) {
 
 	auto lv = Level.simple();
 	auto player = new Player(window);
+	auto ball = new Ball(window);
 
 	while (window.isOpen) {
 		Event event;
@@ -31,14 +34,15 @@ void main(string[] args) {
 		}
 
 		if (Keyboard.isKeyPressed(Keyboard.Key.Left)) {
-			player.move(-5);
+			player.move(-player.speed);
 		} else if (Keyboard.isKeyPressed(Keyboard.Key.Right)) {
-			player.move(5);
+			player.move(player.speed);
 		}
 
 		window.clear();
 		window.draw(lv);
 		window.draw(player);
+		window.draw(ball);
 		window.display();
 	}
 }
