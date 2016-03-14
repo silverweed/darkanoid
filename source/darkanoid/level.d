@@ -41,7 +41,7 @@ class Level : Drawable {
 	}
 
 	static Level simple(in int nRows = 5) {
-		Level lv = new Level();
+		Level lv = new Level;
 		
 		for (int i = 0; i < nRows; ++i) {
 			lv.addRow(BrickColors[i % BrickColors.length]);

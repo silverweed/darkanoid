@@ -23,5 +23,5 @@ string appBasePath;
 Resources resources;
 
 static this() {
-	resources = new Resources();
+	resources = new Resources;
 }
