@@ -7,11 +7,7 @@ void main(string[] args) {
 
 	debug stderr.writeln("base path: " ~ appBasePath);
 
-	auto window = new RenderWindow(VideoMode(800, 600), "Hello");
-
-	auto circle = new CircleShape(5);
-	circle.position = Vector2f(100, 100);
-	circle.fillColor = Color.Green;
+	auto window = new RenderWindow(VideoMode(Entity.MAX_X, Entity.MAX_Y), "Hello");
 
 	auto lv = Level.simple();
 	auto player = new Player(window);
@@ -34,10 +30,12 @@ void main(string[] args) {
 		}
 
 		if (Keyboard.isKeyPressed(Keyboard.Key.Left)) {
-			player.move(-player.speed);
+			player.move(-player.speed[0]);
 		} else if (Keyboard.isKeyPressed(Keyboard.Key.Right)) {
-			player.move(player.speed);
+			player.move(player.speed[0]);
 		}
+
+		ball.move();
 
 		window.clear();
 		window.draw(lv);

@@ -1,5 +1,5 @@
 module darkanoid.interfaces;
 
 interface Moveable {
-	public void move(in float x);
+	public void move(in float x, in float y);
 }
